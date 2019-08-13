@@ -10,6 +10,8 @@
 #include <cmath>
 
 
+#define TAMV 300
+
 using namespace std;
 
 

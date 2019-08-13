@@ -44,7 +44,7 @@ void TorsionI::split(vector<string> &theStringVector, const string &theString, c
  */
 vector<double> TorsionI::sumtorsion(vector<double> &v1, vector<double> &v2) {
 
-    vector<double> vr(300, 0.0);
+    vector<double> vr(TAMV, 0.0);
     size_t tam = v1.size();
 
     for (size_t i = 0; i < tam; i++) {

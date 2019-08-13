@@ -9,6 +9,8 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <algorithm>
+#include <cctype>
 
 #include <pqxx/pqxx>
 
@@ -29,6 +31,8 @@ private:
     void abreArchivo();
 
     void recuperaContenidos(pqxx::connection &conn,string smodulo);
+
+    void split(vector<string> &theStringVector, const string &theString, const string &theDelimiter);
 
 };
 

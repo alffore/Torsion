@@ -9,13 +9,13 @@
 #include <cmath>
 #include <cstdlib>
 
+
+#include "EntradaD.h"
 #include "DBOper.h"
 #include "TorsionI.h"
 #include "Diccionario.h"
 
-
 using namespace std;
-
 
 
 vector<EntradaD> diccionario;

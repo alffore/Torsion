@@ -10,14 +10,13 @@
 #include <iostream>
 #include <fstream>
 
+#include "EntradaD.h"
+
 #define TAMV 300
 
 using namespace std;
 
-struct EntradaD {
-    string concepto;
-    vector<double> v;
-};
+
 
 
 class Diccionario {
@@ -29,7 +28,6 @@ private:
     void cargaDiccionario(vector<EntradaD> &vdiccionario);
 
 public:
-
     Diccionario(vector<EntradaD> &vdiccionario, string snomarch);
 
 

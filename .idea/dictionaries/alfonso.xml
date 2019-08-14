@@ -12,8 +12,10 @@
       <w>contenidos</w>
       <w>credenciales</w>
       <w>dboper</w>
+      <w>dicc</w>
       <w>diccionario</w>
       <w>entrada</w>
+      <w>lcfat</w>
       <w>observaciones</w>
       <w>oper</w>
       <w>oracion</w>
@@ -26,6 +28,7 @@
       <w>sarchivo</w>
       <w>scadv</w>
       <w>scampo</w>
+      <w>sidea</w>
       <w>smodulo</w>
       <w>snomarch</w>
       <w>sumtorsion</w>
@@ -34,6 +37,7 @@
       <w>todos</w>
       <w>utiles</w>
       <w>vdiccionario</w>
+      <w>videas</w>
     </words>
   </dictionary>
 </component>

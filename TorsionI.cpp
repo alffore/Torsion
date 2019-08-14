@@ -8,8 +8,27 @@ TorsionI::TorsionI() {
 
 }
 
-vector<double> TorsionI::calculaTorsion(vector<string> &dicc, vector<string> &videas) {
+vector<double> TorsionI::calculaTorsion(vector<EntradaD> &dicc, vector<string> &videas) {
 
+    for (string sidea : videas) {
+        vector<string> vcon;
+        vector<double> vcon_nt;
+        split(vcon, sidea, " ");
+
+        for (string scon : vcon) {
+
+            auto v = concepto2vector(dicc, scon);
+            if (v.size() == TAMV) {
+                if (vcon_nt.size() == 0) {
+                    vcon_nt = v;
+                } else {
+                    vcon_nt = sumtorsion(vcon_nt, v);
+                }
+            }
+
+
+        }
+    }
 
     return vector<double>();
 }
@@ -60,6 +79,7 @@ vector<double> TorsionI::sumtorsion(vector<double> &v1, vector<double> &v2) {
     return vr;
 }
 
+
 /**
  * https://en.wikipedia.org/wiki/Levi-Civita_symbol
  * https://www.johndcook.com/blog/2018/09/16/permutation-tensor/
@@ -78,5 +98,27 @@ double TorsionI::lcfat(double i, double j, double k) {
 
     return aux / fabs(aux);
 }
+
+/**
+ *
+ * @param dicc
+ * @param scad
+ * @return
+ */
+vector<double> TorsionI::concepto2vector(vector<EntradaD> &dicc, string scad) {
+
+    for (EntradaD e: dicc) {
+
+        if (e.concepto == scad) {
+            vector<double> v(e.v);
+            return v;
+        }
+    }
+
+
+    return vector<double>();
+}
+
+
 
 

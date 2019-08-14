@@ -2,6 +2,7 @@
   <dictionary name="alfonso">
     <words>
       <w>abre</w>
+      <w>agrupador</w>
       <w>archivo</w>
       <w>calcula</w>
       <w>carga</w>
@@ -13,9 +14,12 @@
       <w>dboper</w>
       <w>diccionario</w>
       <w>entrada</w>
+      <w>observaciones</w>
       <w>oper</w>
+      <w>oracion</w>
       <w>publica</w>
       <w>recupera</w>
+      <w>renic</w>
       <w>sagr</w>
       <w>salida</w>
       <w>sarchconf</w>
@@ -23,8 +27,13 @@
       <w>scadv</w>
       <w>scampo</w>
       <w>smodulo</w>
+      <w>snomarch</w>
       <w>sumtorsion</w>
       <w>tamv</w>
+      <w>texto</w>
+      <w>todos</w>
+      <w>utiles</w>
+      <w>vdiccionario</w>
     </words>
   </dictionary>
 </component>

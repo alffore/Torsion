@@ -54,10 +54,11 @@ void DBOper::recuperaContenidos(pqxx::connection &conn, string smodulo) {
 
     string sobs("observaciones");
     string sagr("agrupador");
+    vector<string> oracion;
 
     pqxx::work wrk{conn};
 
-    pqxx::result res = wrk.exec("SELECT * FROM " + smodulo + " WHERE " + smodulo + "_info_publica=true limit 1");
+    pqxx::result res = wrk.exec("SELECT * FROM " + smodulo + " WHERE " + smodulo + "_info_publica=true ORDER BY random() LIMIT 1");
 
     if (res.size() < 1) {
         return;
@@ -74,13 +75,18 @@ void DBOper::recuperaContenidos(pqxx::connection &conn, string smodulo) {
                     transform(scadv.begin(), scadv.end(), scadv.begin(),
                               [](unsigned char c) { return tolower(c); });
 
-                    cout << res.column_type(j) << "::" << scampo << "::" << scadv << endl;
+                    //cout << res.column_type(j) << "::" << scampo << "::" << scadv << endl;
+                    split(oracion, scadv, ".");
                 }
             }
         }
     }
 
 
+    /*for (string s: oracion) {
+        cout << s << endl;
+    }
+    cout <<"\t Cantidad de ideas: "<<oracion.size()<<endl;*/
 }
 
 /**

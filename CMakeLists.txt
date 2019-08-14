@@ -3,6 +3,6 @@ project(torsion)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(torsion main.cpp DBOper.cpp DBOper.h TorsionI.cpp TorsionI.h)
+add_executable(torsion main.cpp DBOper.cpp DBOper.h TorsionI.cpp TorsionI.h Diccionario.cpp Diccionario.h)
 
 target_link_libraries(torsion -lpqxx -lpq)

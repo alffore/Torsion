@@ -7,10 +7,17 @@
 TorsionI::TorsionI() {
 
 }
-
+/**
+ *
+ * @param dicc
+ * @param videas
+ * @return
+ */
 vector<double> TorsionI::calculaTorsion(vector<EntradaD> &dicc, vector<string> &videas) {
 
-    for (string sidea : videas) {
+    vector<double> videas_num(TAMV,0.0);
+
+    for (string &sidea : videas) {
         vector<string> vcon;
         vector<double> vcon_nt;
         split(vcon, sidea, " ");
@@ -19,18 +26,23 @@ vector<double> TorsionI::calculaTorsion(vector<EntradaD> &dicc, vector<string> &
 
             auto v = concepto2vector(dicc, scon);
             if (v.size() == TAMV) {
-                if (vcon_nt.size() == 0) {
+                if (vcon_nt.empty()) {
                     vcon_nt = v;
                 } else {
                     vcon_nt = sumtorsion(vcon_nt, v);
                 }
             }
 
+        }
 
+        for(size_t i=0; i<TAMV; i++){
+            videas_num[i]+=vcon_nt[i];
         }
     }
 
-    return vector<double>();
+    normaliza(videas_num);
+
+    return videas_num;
 }
 
 /**
@@ -105,7 +117,7 @@ double TorsionI::lcfat(double i, double j, double k) {
  * @param scad
  * @return
  */
-vector<double> TorsionI::concepto2vector(vector<EntradaD> &dicc, string scad) {
+vector<double> TorsionI::concepto2vector(vector<EntradaD> &dicc, string &scad) {
 
     for (EntradaD e: dicc) {
 
@@ -115,8 +127,24 @@ vector<double> TorsionI::concepto2vector(vector<EntradaD> &dicc, string scad) {
         }
     }
 
-
     return vector<double>();
+}
+/**
+ *
+ * @param v
+ */
+void TorsionI::normaliza(vector<double> &v) {
+    double mag2 = 0.0;
+    for (double c : v) {
+        mag2 += pow(c, 2.0);
+    }
+
+    mag2 = sqrt(mag2);
+
+    for (size_t i = 0; i < TAMV; i++) {
+        v[i] /= mag2;
+    }
+
 }
 
 

@@ -31,7 +31,9 @@ private:
 
     double lcfat(double i,double j,double k);
 
-    vector<double> concepto2vector(vector<EntradaD> &dicc,string scad);
+    vector<double> concepto2vector(vector<EntradaD> &dicc,string &scad);
+
+    void normaliza(vector<double> &v);
 };
 
 

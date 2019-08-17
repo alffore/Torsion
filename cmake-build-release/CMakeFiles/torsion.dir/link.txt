@@ -1,1 +1,0 @@
-/usr/bin/c++  -O3 -DNDEBUG   CMakeFiles/torsion.dir/main.cpp.o CMakeFiles/torsion.dir/DBOper.cpp.o CMakeFiles/torsion.dir/TorsionI.cpp.o CMakeFiles/torsion.dir/Diccionario.cpp.o  -o torsion -lpqxx -lpq 

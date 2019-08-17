@@ -1,3 +1,0 @@
-/home/alfonso/CLionProjects/Torsion/cmake-build-release/CMakeFiles/rebuild_cache.dir
-/home/alfonso/CLionProjects/Torsion/cmake-build-release/CMakeFiles/torsion.dir
-/home/alfonso/CLionProjects/Torsion/cmake-build-release/CMakeFiles/edit_cache.dir

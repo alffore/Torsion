@@ -31,34 +31,29 @@ void DBOper::abreConexion() {
     /*string sconn("host=" + credenciales[0] + " port=" + credenciales[1] + " dbname=" + credenciales[2] + " user=" +
                  credenciales[3] + " password=" + credenciales[4]);*/
 
-    string sconn("postgresql://postgres@localhost/nuevadbrenic");
-
-    cout << "Conexion: " << sconn << endl;
 
 
-    pqxx::connection conn{sconn.c_str()};
 
 
-    string smodulo = "museo";
-    recuperaContenidos(conn, smodulo);
-
-    conn.disconnect();
 }
 
 /**
  *
- * @param conn
  * @param smodulo
+ * @param vr
  */
-void DBOper::recuperaContenidos(pqxx::connection &conn, string smodulo) {
+void DBOper::recuperaContenidos( string smodulo ,vector<EntradaR> &vr) {
+    string sconn{"postgresql://postgres@localhost/nuevadbrenic"};
+    pqxx::connection conn{sconn.c_str()};
 
     string sobs("observaciones");
     string sagr("agrupador");
-    vector<string> oracion;
+
+
 
     pqxx::work wrk{conn};
 
-    pqxx::result res = wrk.exec("SELECT * FROM " + smodulo + " WHERE " + smodulo + "_info_publica=true ORDER BY random() LIMIT 1");
+    pqxx::result res = wrk.exec("SELECT "+smodulo+"_id as idrec, * FROM " + smodulo + " WHERE " + smodulo + "_info_publica=true  LIMIT 1");
 
     if (res.size() < 1) {
         return;
@@ -67,6 +62,11 @@ void DBOper::recuperaContenidos(pqxx::connection &conn, string smodulo) {
     pqxx::row_size_type num_columnas = res.columns();
 
     for (int i = 0; i < res.size(); i++) {
+        EntradaR erec;
+        erec.stabla=smodulo;
+
+        erec.id=res[i][0].as<int>();
+
         for (auto j = 0; j < num_columnas; j++) {
             if ((res.column_type(j) == 25 || res.column_type(j) == 1043) && res[i][j].size() > 0) {
                 string scampo = res.column_name(j);
@@ -75,18 +75,16 @@ void DBOper::recuperaContenidos(pqxx::connection &conn, string smodulo) {
                     transform(scadv.begin(), scadv.end(), scadv.begin(),
                               [](unsigned char c) { return tolower(c); });
 
-                    //cout << res.column_type(j) << "::" << scampo << "::" << scadv << endl;
-                    split(oracion, scadv, ".");
+                    split(erec.oracion, scadv, ".");
                 }
             }
         }
+
+        vr.push_back(erec);
+
     }
 
-
-    /*for (string s: oracion) {
-        cout << s << endl;
-    }
-    cout <<"\t Cantidad de ideas: "<<oracion.size()<<endl;*/
+    conn.disconnect();
 }
 
 /**

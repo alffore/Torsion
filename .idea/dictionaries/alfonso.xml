@@ -7,6 +7,7 @@
       <w>calcula</w>
       <w>carga</w>
       <w>columnas</w>
+      <w>comun</w>
       <w>concepto</w>
       <w>conexion</w>
       <w>contenidos</w>
@@ -15,13 +16,20 @@
       <w>dicc</w>
       <w>diccionario</w>
       <w>entrada</w>
+      <w>entradar</w>
+      <w>erec</w>
+      <w>idrec</w>
       <w>lcfat</w>
+      <w>localizado</w>
       <w>normaliza</w>
+      <w>nuevadbrenic</w>
       <w>observaciones</w>
       <w>oper</w>
       <w>oracion</w>
+      <w>postgresql</w>
       <w>publica</w>
       <w>recupera</w>
+      <w>registros</w>
       <w>renic</w>
       <w>sagr</w>
       <w>salida</w>
@@ -29,17 +37,24 @@
       <w>sarchivo</w>
       <w>scadv</w>
       <w>scampo</w>
+      <w>scon</w>
+      <w>sconn</w>
       <w>sidea</w>
       <w>smodulo</w>
       <w>snomarch</w>
+      <w>stabla</w>
       <w>sumtorsion</w>
       <w>tamv</w>
+      <w>termino</w>
       <w>texto</w>
       <w>todos</w>
       <w>torsioni</w>
       <w>utiles</w>
+      <w>vcon</w>
       <w>vdiccionario</w>
       <w>videas</w>
+      <w>vrec</w>
+      <w>vtorsion</w>
     </words>
   </dictionary>
 </component>

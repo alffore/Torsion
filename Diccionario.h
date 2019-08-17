@@ -11,15 +11,14 @@
 #include <fstream>
 
 #include "EntradaD.h"
+#include "Comun.h"
 
-#define TAMV 300
+
 
 using namespace std;
 
-
-
-
 class Diccionario {
+
 private:
     string snomarch;
 

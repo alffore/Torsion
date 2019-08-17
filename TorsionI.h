@@ -5,13 +5,17 @@
 #ifndef TORSION_TORSIONI_H
 #define TORSION_TORSIONI_H
 
+#include <iostream>
 #include <vector>
 #include <string>
 #include <cmath>
 
-#include "EntradaD.h"
+#include <boost/algorithm/string.hpp>
 
-#define TAMV 300
+#include "EntradaD.h"
+#include "EntradaR.h"
+#include "Comun.h"
+
 
 using namespace std;
 
@@ -21,7 +25,7 @@ class TorsionI {
 public:
     TorsionI();
 
-    vector<double> calculaTorsion(vector<EntradaD> &dicc, vector<string> &ideas);
+    void calculaTorsion(vector<EntradaD> &dicc, vector<EntradaR> &vrec);
 
     void split(vector<string>& theStringVector, const string& theString, const string& theDelimiter);
 
@@ -29,7 +33,7 @@ private:
 
     vector<double> sumtorsion(vector<double>& v1 ,vector<double>& v2);
 
-    double lcfat(double i,double j,double k);
+    static double lcfat(double i,double j,double k);
 
     vector<double> concepto2vector(vector<EntradaD> &dicc,string &scad);
 

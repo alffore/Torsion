@@ -8,6 +8,7 @@
 #include <string>
 #include <cmath>
 #include <cstdlib>
+#include <boost/thread.hpp>
 
 #include "Comun.h"
 #include "EntradaD.h"
@@ -15,11 +16,17 @@
 #include "TorsionI.h"
 #include "Diccionario.h"
 
+
+#define NTHREADS 8
+
 using namespace std;
 
 
 vector<EntradaD> diccionario;
 vector<EntradaR> vrec;
+
+
+
 
 /**
  *
@@ -38,9 +45,29 @@ int main() {
 
 
     cout << "Se calcula la torsion para los registros"<<endl;
-    TorsionI tori;
+ //   TorsionI tori(0,8,vrec,diccionario);
+ //   tori.calculaTorsion();
 
-    tori.calculaTorsion(diccionario,vrec);
+
+    // version multithread wit Boost
+    TorsionI *pti[NTHREADS];
+    boost::thread threads[NTHREADS];
+
+    for(size_t t=0; t < NTHREADS; t++){
+        pti[t]=new TorsionI(t,NTHREADS,vrec,diccionario);
+        threads[t] = boost::thread(*pti[t]);
+    }
+
+    for (auto & thread : threads) {
+        thread.join();
+    }
+
+    for (auto & t : pti) {
+        delete t;
+    }
+
+
+
 
     cout <<vrec[0].id <<endl;
 

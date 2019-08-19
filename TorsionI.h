@@ -23,19 +23,28 @@ using namespace std;
 
 class TorsionI {
 public:
-    TorsionI();
 
-    void calculaTorsion(vector<EntradaD> &dicc, vector<EntradaR> &vrec);
+    TorsionI(int avance, int paso, vector<EntradaR> &vrec,vector<EntradaD> &dicc);
+
+    void operator()();
+
+    void calculaTorsion();
 
     void split(vector<string>& theStringVector, const string& theString, const string& theDelimiter);
 
 private:
+    int avance;
+    int paso;
+
+    vector<EntradaR>& vrec;
+    vector<EntradaD>& diccionario;
+
 
     vector<double> sumtorsion(vector<double>& v1 ,vector<double>& v2);
 
     static double lcfat(double i,double j,double k);
 
-    vector<double> concepto2vector(vector<EntradaD> &dicc,string &scad);
+    vector<double> concepto2vector(string &scad);
 
     void normaliza(vector<double> &v);
 };

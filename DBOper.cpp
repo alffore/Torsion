@@ -49,11 +49,9 @@ void DBOper::recuperaContenidos( string smodulo ,vector<EntradaR> &vr) {
     string sobs("observaciones");
     string sagr("agrupador");
 
-
-
     pqxx::work wrk{conn};
 
-    pqxx::result res = wrk.exec("SELECT "+smodulo+"_id as idrec, * FROM " + smodulo + " WHERE " + smodulo + "_info_publica=true  LIMIT 1");
+    pqxx::result res = wrk.exec("SELECT "+smodulo+"_id as idrec, * FROM " + smodulo + " WHERE " + smodulo + "_info_publica=true  LIMIT 24");
 
     if (res.size() < 1) {
         return;

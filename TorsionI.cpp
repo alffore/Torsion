@@ -4,44 +4,50 @@
 
 #include "TorsionI.h"
 
-TorsionI::TorsionI() {
 
+
+TorsionI::TorsionI(int avance, int paso,  vector<EntradaR> &vrec,vector<EntradaD> &dicc): vrec(vrec), diccionario(dicc) {
+    this->avance=avance;
+    this->paso=paso;
 }
 
-/**
- *
- * @param dicc
- * @param videas
- * @return
- */
-void TorsionI::calculaTorsion(vector<EntradaD> &dicc, vector<EntradaR> &vrec) {
+
+void TorsionI::operator()() {
+    calculaTorsion();
+}
+
+
+void TorsionI::calculaTorsion() {
     size_t tam = vrec.size();
-    for (size_t i = 0; i < tam; i++) {
-        cout << " Tam vector torsion: " << vrec[i].vtorsion.size() << endl;
-         for (string &sidea : vrec[i].oracion) {
-             vector<string> vcon;
-             vector<double> vcon_nt;
-             split(vcon, sidea, " ");
 
-             for (string scon : vcon) {
+    for (size_t i = avance; i < tam; i+=paso) {
+        //cout << " Tam vector torsion: " << vrec[i].vtorsion.size() << endl;
+        for (string &sidea : vrec[i].oracion) {
+            vector<string> vcon;
+            vector<double> vcon_nt;
+            split(vcon, sidea, " ");
 
-                 auto v = concepto2vector(dicc, scon);
-                 if (v.size() == TAMV) {
-                     if (vcon_nt.empty()) {
-                         vcon_nt = v;
-                     } else {
-                         vcon_nt = sumtorsion(vcon_nt, v);
-                     }
-                 }
+            for (string scon : vcon) {
 
-             }
+                auto v = concepto2vector(scon);
+                if (v.size() == TAMV) {
+                    if (vcon_nt.empty()) {
+                        vcon_nt = v;
+                    } else {
+                        vcon_nt = sumtorsion(vcon_nt, v);
+                    }
+                }
 
-             for (size_t j = 0; j < TAMV; j++) {
-                 //vrec[i].vtorsion[j] += vcon_nt[j];
-             }
-         }
+            }
 
-        //normaliza(r.vtorsion);
+            if(!vcon_nt.empty()) {
+                for (size_t j = 0; j < TAMV; j++) {
+                    vrec[i].vtorsion[j] += vcon_nt[j];
+                }
+            }
+        }
+
+        normaliza(vrec[i].vtorsion);
     }
 
 }
@@ -118,12 +124,12 @@ double TorsionI::lcfat(double i, double j, double k) {
  * @param scad
  * @return
  */
-vector<double> TorsionI::concepto2vector(vector<EntradaD> &dicc, string &scad) {
+vector<double> TorsionI::concepto2vector(string &scad) {
 
     boost::trim_right(scad);
     boost::trim_left(scad);
 
-    for (EntradaD e: dicc) {
+    for (EntradaD& e: diccionario) {
 
         if (e.concepto == scad) {
             vector<double> v(e.v);
@@ -131,7 +137,7 @@ vector<double> TorsionI::concepto2vector(vector<EntradaD> &dicc, string &scad) {
         }
     }
 
-    cout << "Termino no localizado: "<<scad<<endl;
+    cout << avance << ": Termino no localizado: "<<scad<<endl;
     return vector<double>();
 }
 
@@ -153,3 +159,7 @@ void TorsionI::normaliza(vector<double> &v) {
         }
     }
 }
+
+
+
+

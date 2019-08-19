@@ -4,6 +4,7 @@
       <w>abre</w>
       <w>agrupador</w>
       <w>archivo</w>
+      <w>avance</w>
       <w>calcula</w>
       <w>carga</w>
       <w>columnas</w>
@@ -21,13 +22,18 @@
       <w>idrec</w>
       <w>lcfat</w>
       <w>localizado</w>
+      <w>multithread</w>
       <w>normaliza</w>
+      <w>nthreads</w>
       <w>nuevadbrenic</w>
       <w>observaciones</w>
       <w>oper</w>
       <w>oracion</w>
+      <w>paso</w>
+      <w>pdicc</w>
       <w>postgresql</w>
       <w>publica</w>
+      <w>pvreg</w>
       <w>recupera</w>
       <w>registros</w>
       <w>renic</w>

@@ -25,8 +25,7 @@ using namespace std;
 vector<EntradaD> diccionario;
 vector<EntradaR> vrec;
 
-
-
+string caraclimpiar=u8"/#!()<>\"';:\\¿¡^,|";
 
 /**
  *
@@ -34,50 +33,52 @@ vector<EntradaR> vrec;
  */
 int main() {
 
-    cout << "Se carga el diccionario"<<endl;
-    Diccionario dicc(diccionario,"/home/alfonso/NetBeansProjects/renic/utiles/texto_todos/vectors_sic.txt");
+    cout << "Se carga el diccionario" << endl;
+    Diccionario dicc(diccionario, "/home/alfonso/NetBeansProjects/renic/utiles/texto_todos/vectors_sic.txt");
 
-    cout<<"Se abre y recuperan los registros"<<endl;
-    DBOper mdb("dbrenic.txt");
+    cout << "Se abre y recuperan los registros" << endl;
+    DBOper mdb("dbrenic.txt",caraclimpiar);
 
-    mdb.recuperaContenidos("museo",vrec);
-    cout << "Tam. vrec: "<<vrec.size()<<endl;
+    mdb.recuperaContenidos("museo", vrec);
+    cout << "Tam. vrec: " << vrec.size() << endl;
 
 
-    cout << "Se calcula la torsion para los registros"<<endl;
- //   TorsionI tori(0,8,vrec,diccionario);
- //   tori.calculaTorsion();
+    cout << "Se calcula la torsion para los registros" << endl;
+
 
 
     // version multithread wit Boost
     TorsionI *pti[NTHREADS];
     boost::thread threads[NTHREADS];
 
-    for(size_t t=0; t < NTHREADS; t++){
-        pti[t]=new TorsionI(t,NTHREADS,vrec,diccionario);
+    for (size_t t = 0; t < NTHREADS; t++) {
+        pti[t] = new TorsionI(t, NTHREADS, vrec, diccionario);
         threads[t] = boost::thread(*pti[t]);
     }
 
-    for (auto & thread : threads) {
+    for (auto &thread : threads) {
         thread.join();
     }
 
-    for (auto & t : pti) {
+    for (auto &t : pti) {
         delete t;
     }
 
 
+    ofstream miarchivo("museo_sal.sql");
+    for (EntradaR e: vrec) {
+        miarchivo << "INSERT INTO ideas VALUES('" << e.stabla << "'," << e.id << ",[";
 
 
-    cout <<vrec[0].id <<endl;
+        miarchivo<<e.vtorsion[0];
+        for(size_t i=1;i<TAMV;i++){
+            miarchivo<<","<<e.vtorsion[i];
+        }
 
-    for(size_t i=0;i<TAMV;i++){
-        cout<<vrec[0].vtorsion[i]<<" ";
+        miarchivo << "]);";
+        miarchivo << "\n";
     }
-
-    cout <<endl <<endl;
-
-
+    miarchivo.close();
 
     return 0;
 }

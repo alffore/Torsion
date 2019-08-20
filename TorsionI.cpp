@@ -5,24 +5,35 @@
 #include "TorsionI.h"
 
 
-
-TorsionI::TorsionI(int avance, int paso,  vector<EntradaR> &vrec,vector<EntradaD> &dicc): vrec(vrec), diccionario(dicc) {
-    this->avance=avance;
-    this->paso=paso;
+/**
+ *
+ * @param avance
+ * @param paso
+ * @param vrec
+ * @param dicc
+ */
+TorsionI::TorsionI(int avance, int paso, vector<EntradaR> &vrec, vector<EntradaD> &dicc) : vrec(vrec),
+                                                                                           diccionario(dicc) {
+    this->avance = avance;
+    this->paso = paso;
 }
 
-
+/**
+ *
+ */
 void TorsionI::operator()() {
     calculaTorsion();
 }
 
-
+/**
+ *
+ */
 void TorsionI::calculaTorsion() {
     size_t tam = vrec.size();
 
-    for (size_t i = avance; i < tam; i+=paso) {
+    for (size_t i = avance; i < tam; i += paso) {
         //cout << " Tam vector torsion: " << vrec[i].vtorsion.size() << endl;
-        for (string &sidea : vrec[i].oracion) {
+        for (string &sidea : vrec[i].voracion) {
             vector<string> vcon;
             vector<double> vcon_nt;
             split(vcon, sidea, " ");
@@ -40,7 +51,7 @@ void TorsionI::calculaTorsion() {
 
             }
 
-            if(!vcon_nt.empty()) {
+            if (!vcon_nt.empty()) {
                 for (size_t j = 0; j < TAMV; j++) {
                     vrec[i].vtorsion[j] += vcon_nt[j];
                 }
@@ -89,8 +100,15 @@ vector<double> TorsionI::sumtorsion(vector<double> &v1, vector<double> &v2) {
         vr[i] = v1[i] + v2[i];
 
         for (size_t j = 0; j < tam; j++) {
-            for (size_t k = 0; k < tam; k++) {
-                vr[i] += lcfat(i, j, k) * v1[j] * v2[k];
+            if (j != i) {
+                for (size_t k = 0; k < tam; k++) {
+                    if (k != j && k != i) {
+                        double aux = lcfat(i, j, k);
+                        if (aux > 0) {
+                            vr[i] += aux * v1[j] * v2[k];
+                        }
+                    }
+                }
             }
         }
     }
@@ -129,15 +147,17 @@ vector<double> TorsionI::concepto2vector(string &scad) {
     boost::trim_right(scad);
     boost::trim_left(scad);
 
-    for (EntradaD& e: diccionario) {
+    if(scad.size()>0) {
 
-        if (e.concepto == scad) {
-            vector<double> v(e.v);
-            return v;
+        for (EntradaD &e: diccionario) {
+
+            if (e.concepto == scad) {
+                vector<double> v(e.v);
+                return v;
+            }
         }
     }
-
-    cout << avance << ": Termino no localizado: "<<scad<<endl;
+    cout << avance << ": Termino no localizado: " << scad << endl;
     return vector<double>();
 }
 
@@ -159,6 +179,8 @@ void TorsionI::normaliza(vector<double> &v) {
         }
     }
 }
+
+
 
 
 

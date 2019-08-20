@@ -4,9 +4,10 @@
 
 #include "DBOper.h"
 
-DBOper::DBOper(string sarchconf) {
+DBOper::DBOper(string sarchconf, string caracteres) : caracteres(caracteres) {
 
     sarchivo = sarchconf;
+
     //abreArchivo();
     abreConexion();
 
@@ -30,11 +31,6 @@ void DBOper::abreArchivo() {
 void DBOper::abreConexion() {
     /*string sconn("host=" + credenciales[0] + " port=" + credenciales[1] + " dbname=" + credenciales[2] + " user=" +
                  credenciales[3] + " password=" + credenciales[4]);*/
-
-
-
-
-
 }
 
 /**
@@ -42,7 +38,7 @@ void DBOper::abreConexion() {
  * @param smodulo
  * @param vr
  */
-void DBOper::recuperaContenidos( string smodulo ,vector<EntradaR> &vr) {
+void DBOper::recuperaContenidos(string smodulo, vector<EntradaR> &vr) {
     string sconn{"postgresql://postgres@localhost/nuevadbrenic"};
     pqxx::connection conn{sconn.c_str()};
 
@@ -51,7 +47,8 @@ void DBOper::recuperaContenidos( string smodulo ,vector<EntradaR> &vr) {
 
     pqxx::work wrk{conn};
 
-    pqxx::result res = wrk.exec("SELECT "+smodulo+"_id as idrec, * FROM " + smodulo + " WHERE " + smodulo + "_info_publica=true  LIMIT 24");
+    pqxx::result res = wrk.exec("SELECT " + smodulo + "_id as idrec, * FROM " + smodulo + " WHERE " + smodulo +
+                                "_info_publica=true  LIMIT 8");
 
     if (res.size() < 1) {
         return;
@@ -61,9 +58,9 @@ void DBOper::recuperaContenidos( string smodulo ,vector<EntradaR> &vr) {
 
     for (int i = 0; i < res.size(); i++) {
         EntradaR erec;
-        erec.stabla=smodulo;
+        erec.stabla = smodulo;
 
-        erec.id=res[i][0].as<int>();
+        erec.id = res[i][0].as<int>();
 
         for (auto j = 0; j < num_columnas; j++) {
             if ((res.column_type(j) == 25 || res.column_type(j) == 1043) && res[i][j].size() > 0) {
@@ -72,8 +69,8 @@ void DBOper::recuperaContenidos( string smodulo ,vector<EntradaR> &vr) {
                     string scadv = res[i][j].c_str();
                     transform(scadv.begin(), scadv.end(), scadv.begin(),
                               [](unsigned char c) { return tolower(c); });
-
-                    split(erec.oracion, scadv, ".");
+//this->remueveCarL(scadv);
+                    split(erec.voracion, scadv, ".");
                 }
             }
         }
@@ -105,4 +102,17 @@ void DBOper::split(vector<string> &theStringVector, const string &theString, con
         start = ((end > (string::npos - theDelimiter.size()))
                  ? string::npos : end + theDelimiter.size());
     }
+}
+
+/**
+ * @see https://www.techiedelight.com/remove-certain-characters-string-cpp/
+ * @param scad
+ * @return
+ */
+void DBOper::remueveCarL(string &scad) {
+
+    for (char c: caracteres) {
+        scad.erase(remove(scad.begin(), scad.end(), c), scad.end());
+    }
+
 }

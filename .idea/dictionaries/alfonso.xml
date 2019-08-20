@@ -6,6 +6,8 @@
       <w>archivo</w>
       <w>avance</w>
       <w>calcula</w>
+      <w>caraclimpiar</w>
+      <w>caracteres</w>
       <w>carga</w>
       <w>columnas</w>
       <w>comun</w>
@@ -20,8 +22,10 @@
       <w>entradar</w>
       <w>erec</w>
       <w>idrec</w>
+      <w>imprime</w>
       <w>lcfat</w>
       <w>localizado</w>
+      <w>miarchivo</w>
       <w>multithread</w>
       <w>normaliza</w>
       <w>nthreads</w>
@@ -36,6 +40,7 @@
       <w>pvreg</w>
       <w>recupera</w>
       <w>registros</w>
+      <w>remueve</w>
       <w>renic</w>
       <w>sagr</w>
       <w>salida</w>
@@ -59,6 +64,7 @@
       <w>vcon</w>
       <w>vdiccionario</w>
       <w>videas</w>
+      <w>voracion</w>
       <w>vrec</w>
       <w>vtorsion</w>
     </words>

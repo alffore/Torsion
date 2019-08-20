@@ -15,7 +15,7 @@ public:
     std::string stabla;
     int id;
 
-    std::vector<std::string> oracion;
+    std::vector<std::string> voracion;
     std::vector<double> vtorsion;
 
     EntradaR():vtorsion(TAMV,0.0){};

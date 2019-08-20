@@ -23,19 +23,22 @@ using namespace std;
 class DBOper {
 
 public:
-    DBOper(string sarchconf);
+    DBOper(string sarchconf, string caracteres);
     void recuperaContenidos(string smodulo, vector<EntradaR> &vr);
 
 private:
     string sarchivo;
     vector<string> credenciales;
 
+    string caracteres;
 
     void abreConexion(void);
 
     void abreArchivo();
 
     void split(vector<string> &theStringVector, const string &theString, const string &theDelimiter);
+
+    void remueveCarL(string &scad);
 
 };
 

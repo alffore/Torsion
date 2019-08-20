@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 #include <cmath>
+#include <algorithm>
 
 #include <boost/algorithm/string.hpp>
 
@@ -47,6 +48,8 @@ private:
     vector<double> concepto2vector(string &scad);
 
     void normaliza(vector<double> &v);
+
+
 };
 
 

@@ -4,9 +4,7 @@
 
 #include <vector>
 #include <iostream>
-#include <fstream>
 #include <string>
-#include <cmath>
 #include <cstdlib>
 #include <boost/thread.hpp>
 
@@ -22,24 +20,24 @@
 using namespace std;
 
 
-vector<EntradaD> diccionario;
+vector<EntradaD> vdiccionario;
 vector<EntradaR> vrec;
 
-string caraclimpiar=u8"/#!()<>\"';:\\¿¡^,|";
 
+vector<string> vscl={"<br>","</br>","\n","\t","</b>","<b>","<li>","</li>",",",":",";","/","\\","#","$","!","(",")",">","<","¿","?","|","^","'","\""};
 /**
  *
  * @return
  */
 int main() {
 
-    cout << "Se carga el diccionario" << endl;
-    Diccionario dicc(diccionario, "/home/alfonso/NetBeansProjects/renic/utiles/texto_todos/vectors_sic.txt");
+    cout << "Se carga el vdiccionario" << endl;
+    Diccionario dicc(vdiccionario, "/home/alfonso/NetBeansProjects/renic/utiles/texto_todos/vectors_sic.txt");
 
     cout << "Se abre y recuperan los registros" << endl;
-    DBOper mdb("dbrenic.txt",caraclimpiar);
+    DBOper mdb("dbrenic.txt");
 
-    mdb.recuperaContenidos("museo", vrec);
+    mdb.recuperaContenidos("teatro", vrec);
     cout << "Tam. vrec: " << vrec.size() << endl;
 
 
@@ -52,7 +50,7 @@ int main() {
     boost::thread threads[NTHREADS];
 
     for (size_t t = 0; t < NTHREADS; t++) {
-        pti[t] = new TorsionI(t, NTHREADS, vrec, diccionario);
+        pti[t] = new TorsionI(t, NTHREADS, vrec, vdiccionario,vscl);
         threads[t] = boost::thread(*pti[t]);
     }
 
@@ -65,9 +63,9 @@ int main() {
     }
 
 
-    ofstream miarchivo("museo_sal.sql");
+    ofstream miarchivo("teatro_sal.sql");
     for (EntradaR e: vrec) {
-        miarchivo << "INSERT INTO ideas VALUES('" << e.stabla << "'," << e.id << ",[";
+        miarchivo << "INSERT INTO ideas VALUES('" << e.stabla << "'," << e.id << ",{";
 
 
         miarchivo<<e.vtorsion[0];
@@ -75,7 +73,7 @@ int main() {
             miarchivo<<","<<e.vtorsion[i];
         }
 
-        miarchivo << "]);";
+        miarchivo << "});";
         miarchivo << "\n";
     }
     miarchivo.close();

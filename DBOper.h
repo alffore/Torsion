@@ -11,8 +11,8 @@
 #include <vector>
 #include <algorithm>
 #include <cctype>
-
 #include <pqxx/pqxx>
+
 #include "EntradaD.h"
 #include "EntradaR.h"
 #include "Comun.h"
@@ -23,14 +23,14 @@ using namespace std;
 class DBOper {
 
 public:
-    DBOper(string sarchconf, string caracteres);
+    DBOper(string sarchconf);
     void recuperaContenidos(string smodulo, vector<EntradaR> &vr);
 
 private:
     string sarchivo;
     vector<string> credenciales;
 
-    string caracteres;
+
 
     void abreConexion(void);
 
@@ -38,7 +38,7 @@ private:
 
     void split(vector<string> &theStringVector, const string &theString, const string &theDelimiter);
 
-    void remueveCarL(string &scad);
+
 
 };
 

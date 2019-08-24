@@ -4,7 +4,7 @@
 
 #include "DBOper.h"
 
-DBOper::DBOper(string sarchconf, string caracteres) : caracteres(caracteres) {
+DBOper::DBOper(string sarchconf) {
 
     sarchivo = sarchconf;
 
@@ -48,7 +48,7 @@ void DBOper::recuperaContenidos(string smodulo, vector<EntradaR> &vr) {
     pqxx::work wrk{conn};
 
     pqxx::result res = wrk.exec("SELECT " + smodulo + "_id as idrec, * FROM " + smodulo + " WHERE " + smodulo +
-                                "_info_publica=true  LIMIT 8");
+                                "_info_publica=true LIMIT 8");
 
     if (res.size() < 1) {
         return;
@@ -104,15 +104,5 @@ void DBOper::split(vector<string> &theStringVector, const string &theString, con
     }
 }
 
-/**
- * @see https://www.techiedelight.com/remove-certain-characters-string-cpp/
- * @param scad
- * @return
- */
-void DBOper::remueveCarL(string &scad) {
 
-    for (char c: caracteres) {
-        scad.erase(remove(scad.begin(), scad.end(), c), scad.end());
-    }
 
-}

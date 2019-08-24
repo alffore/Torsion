@@ -12,8 +12,9 @@
  * @param vrec
  * @param dicc
  */
-TorsionI::TorsionI(int avance, int paso, vector<EntradaR> &vrec, vector<EntradaD> &dicc) : vrec(vrec),
-                                                                                           diccionario(dicc) {
+TorsionI::TorsionI(int avance, int paso, vector<EntradaR> &vrec, vector<EntradaD> &dicc, vector<string> &vscl)
+        : vrec(vrec),
+          vdiccionario(dicc), vscl(vscl) {
     this->avance = avance;
     this->paso = paso;
 }
@@ -36,6 +37,7 @@ void TorsionI::calculaTorsion() {
         for (string &sidea : vrec[i].voracion) {
             vector<string> vcon;
             vector<double> vcon_nt;
+            remueveCarL(sidea);
             split(vcon, sidea, " ");
 
             for (string scon : vcon) {
@@ -149,7 +151,7 @@ vector<double> TorsionI::concepto2vector(string &scad) {
 
     if(scad.size()>0) {
 
-        for (EntradaD &e: diccionario) {
+        for (EntradaD &e: vdiccionario) {
 
             if (e.concepto == scad) {
                 vector<double> v(e.v);
@@ -178,6 +180,23 @@ void TorsionI::normaliza(vector<double> &v) {
             v[i] /= mag2;
         }
     }
+}
+
+/**
+ * @see https://stackoverflow.com/questions/20326356/how-to-remove-all-the-occurrences-of-a-char-in-c-string
+ * @param scad
+ * @return
+ */
+void TorsionI::remueveCarL(string &scad) {
+
+
+
+
+    for (auto sb: vscl) {
+        boost::replace_all(scad,sb, " ");
+    }
+
+
 }
 
 

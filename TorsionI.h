@@ -12,6 +12,7 @@
 #include <algorithm>
 
 #include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string.hpp>
 
 #include "EntradaD.h"
 #include "EntradaR.h"
@@ -25,7 +26,7 @@ using namespace std;
 class TorsionI {
 public:
 
-    TorsionI(int avance, int paso, vector<EntradaR> &vrec,vector<EntradaD> &dicc);
+    TorsionI(int avance, int paso, vector<EntradaR> &vrec, vector<EntradaD> &dicc, vector<string> &vscl);
 
     void operator()();
 
@@ -38,7 +39,9 @@ private:
     int paso;
 
     vector<EntradaR>& vrec;
-    vector<EntradaD>& diccionario;
+    vector<EntradaD>& vdiccionario;
+
+    vector<string>& vscl;
 
 
     vector<double> sumtorsion(vector<double>& v1 ,vector<double>& v2);
@@ -49,7 +52,7 @@ private:
 
     void normaliza(vector<double> &v);
 
-
+    void remueveCarL(string &scad);
 };
 
 

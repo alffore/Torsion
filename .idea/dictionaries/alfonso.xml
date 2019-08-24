@@ -27,6 +27,7 @@
       <w>localizado</w>
       <w>miarchivo</w>
       <w>multithread</w>
+      <w>museo</w>
       <w>normaliza</w>
       <w>nthreads</w>
       <w>nuevadbrenic</w>
@@ -34,6 +35,8 @@
       <w>oper</w>
       <w>oracion</w>
       <w>paso</w>
+      <w>pcar</w>
+      <w>pcarlim</w>
       <w>pdicc</w>
       <w>postgresql</w>
       <w>publica</w>
@@ -66,6 +69,7 @@
       <w>videas</w>
       <w>voracion</w>
       <w>vrec</w>
+      <w>vscl</w>
       <w>vtorsion</w>
     </words>
   </dictionary>

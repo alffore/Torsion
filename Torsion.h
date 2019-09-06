@@ -2,8 +2,8 @@
 // Created by alfonso on 11/08/19.
 //
 
-#ifndef TORSION_TORSIONI_H
-#define TORSION_TORSIONI_H
+#ifndef TORSION_TORSION_H
+#define TORSION_TORSION_H
 
 #include <iostream>
 #include <vector>
@@ -12,7 +12,7 @@
 #include <algorithm>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string.hpp>
+
 
 #include "EntradaD.h"
 #include "EntradaR.h"
@@ -23,10 +23,10 @@ using namespace std;
 
 
 
-class TorsionI {
+class Torsion {
 public:
 
-    TorsionI(int avance, int paso, vector<EntradaR> &vrec, vector<EntradaD> &dicc, vector<string> &vscl);
+    Torsion(int avance, int paso, vector<EntradaR> &vrec, vector<EntradaD> &dicc, vector<string> &vscl);
 
     void operator()();
 
@@ -56,4 +56,4 @@ private:
 };
 
 
-#endif //TORSION_TORSIONI_H
+#endif //TORSION_TORSION_H

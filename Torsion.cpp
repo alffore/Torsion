@@ -2,7 +2,7 @@
 // Created by alfonso on 11/08/19.
 //
 
-#include "TorsionI.h"
+#include "Torsion.h"
 
 
 /**
@@ -12,7 +12,7 @@
  * @param vrec
  * @param dicc
  */
-TorsionI::TorsionI(int avance, int paso, vector<EntradaR> &vrec, vector<EntradaD> &dicc, vector<string> &vscl)
+Torsion::Torsion(int avance, int paso, vector<EntradaR> &vrec, vector<EntradaD> &dicc, vector<string> &vscl)
         : vrec(vrec),
           vdiccionario(dicc), vscl(vscl) {
     this->avance = avance;
@@ -22,14 +22,14 @@ TorsionI::TorsionI(int avance, int paso, vector<EntradaR> &vrec, vector<EntradaD
 /**
  *
  */
-void TorsionI::operator()() {
+void Torsion::operator()() {
     calculaTorsion();
 }
 
 /**
  *
  */
-void TorsionI::calculaTorsion() {
+void Torsion::calculaTorsion() {
     size_t tam = vrec.size();
 
     for (size_t i = avance; i < tam; i += paso) {
@@ -71,7 +71,7 @@ void TorsionI::calculaTorsion() {
  * @param theString
  * @param theDelimiter
  */
-void TorsionI::split(vector<string> &theStringVector, const string &theString, const string &theDelimiter) {
+void Torsion::split(vector<string> &theStringVector, const string &theString, const string &theDelimiter) {
     size_t start = 0, end = 0;
 
     while (end != string::npos) {
@@ -93,7 +93,7 @@ void TorsionI::split(vector<string> &theStringVector, const string &theString, c
  * @param v2
  * @return
  */
-vector<double> TorsionI::sumtorsion(vector<double> &v1, vector<double> &v2) {
+vector<double> Torsion::sumtorsion(vector<double> &v1, vector<double> &v2) {
 
     vector<double> vr(TAMV, 0.0);
     size_t tam = v1.size();
@@ -128,7 +128,7 @@ vector<double> TorsionI::sumtorsion(vector<double> &v1, vector<double> &v2) {
  * @return
  */
 
-double TorsionI::lcfat(double i, double j, double k) {
+double Torsion::lcfat(double i, double j, double k) {
 
     if (i == j || j == k || k == i) {
         return 0.0;
@@ -144,7 +144,7 @@ double TorsionI::lcfat(double i, double j, double k) {
  * @param scad
  * @return
  */
-vector<double> TorsionI::concepto2vector(string &scad) {
+vector<double> Torsion::concepto2vector(string &scad) {
 
     boost::trim_right(scad);
     boost::trim_left(scad);
@@ -167,7 +167,7 @@ vector<double> TorsionI::concepto2vector(string &scad) {
  *
  * @param v
  */
-void TorsionI::normaliza(vector<double> &v) {
+void Torsion::normaliza(vector<double> &v) {
     double mag2 = 0.0;
     for (double c : v) {
         mag2 += pow(c, 2.0);
@@ -187,7 +187,7 @@ void TorsionI::normaliza(vector<double> &v) {
  * @param scad
  * @return
  */
-void TorsionI::remueveCarL(string &scad) {
+void Torsion::remueveCarL(string &scad) {
 
 
 

@@ -11,7 +11,7 @@
 #include "Comun.h"
 #include "EntradaD.h"
 #include "DBOper.h"
-#include "TorsionI.h"
+#include "Torsion.h"
 #include "Diccionario.h"
 
 
@@ -31,13 +31,15 @@ vector<string> vscl={"<br>","</br>","\n","\t","</b>","<b>","<li>","</li>",",",":
  */
 int main() {
 
+    string smodulo="centro_cultural";
+
     cout << "Se carga el vdiccionario" << endl;
     Diccionario dicc(vdiccionario, "/home/alfonso/NetBeansProjects/renic/utiles/texto_todos/vectors_sic.txt");
 
     cout << "Se abre y recuperan los registros" << endl;
     DBOper mdb("dbrenic.txt");
 
-    mdb.recuperaContenidos("teatro", vrec);
+    mdb.recuperaContenidos(smodulo, vrec);
     cout << "Tam. vrec: " << vrec.size() << endl;
 
 
@@ -46,11 +48,11 @@ int main() {
 
 
     // version multithread wit Boost
-    TorsionI *pti[NTHREADS];
+    Torsion *pti[NTHREADS];
     boost::thread threads[NTHREADS];
 
     for (size_t t = 0; t < NTHREADS; t++) {
-        pti[t] = new TorsionI(t, NTHREADS, vrec, vdiccionario,vscl);
+        pti[t] = new Torsion(t, NTHREADS, vrec, vdiccionario, vscl);
         threads[t] = boost::thread(*pti[t]);
     }
 
@@ -63,7 +65,7 @@ int main() {
     }
 
 
-    ofstream miarchivo("teatro_sal.sql");
+    ofstream miarchivo(smodulo+"_sal.sql");
     for (EntradaR e: vrec) {
         miarchivo << "INSERT INTO ideas VALUES('" << e.stabla << "'," << e.id << ",{";
 

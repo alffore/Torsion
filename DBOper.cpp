@@ -48,7 +48,7 @@ void DBOper::recuperaContenidos(string smodulo, vector<EntradaR> &vr) {
     pqxx::work wrk{conn};
 
     pqxx::result res = wrk.exec("SELECT " + smodulo + "_id as idrec, * FROM " + smodulo + " WHERE " + smodulo +
-                                "_info_publica=true LIMIT 8");
+                                "_info_publica=true");
 
     if (res.size() < 1) {
         return;
